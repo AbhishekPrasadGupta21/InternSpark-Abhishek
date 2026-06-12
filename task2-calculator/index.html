@@ -1,0 +1,735 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator — Abhishek Prasad Gupta</title>
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#1e7b45" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root[data-theme="dark"] {
+        --page-bg: #1a1a1a;
+        --calc-body: #e8e6e0;
+        --calc-border: #c8c6c0;
+        --display-bg: #f5f3ee;
+        --display-border: #d0cec8;
+        --display-text: #1a1a1a;
+        --expr-color: #999999;
+        --topbar-txt: #aaaaaa;
+        --btn-num: #d4d2cc;
+        --btn-num-txt: #111111;
+        --btn-num-border: #2a2a2a;
+        --btn-op: #e8952a;
+        --btn-op-txt: #ffffff;
+        --btn-op-border: #b86e18;
+        --btn-back: #c47a1a;
+        --btn-back-txt: #ffffff;
+        --btn-clr: #d63031;
+        --btn-clr-txt: #ffffff;
+        --btn-eq: #1e7b45;
+        --btn-eq-txt: #ffffff;
+        --btn-br: #bcbab4;
+        --btn-br-txt: #222222;
+        --btn-br-border: #2a2a2a;
+        --btn-hist: #4a4a5a;
+        --btn-hist-txt: #e0e0e0;
+        --btn-hist-border: #2a2a38;
+        --hint-txt: #666666;
+        --hist-entry-bg: rgba(0, 0, 0, 0.06);
+        --hist-entry-h: rgba(0, 0, 0, 0.12);
+        --hist-divider: rgba(0, 0, 0, 0.1);
+        --hist-expr: #777777;
+        --hist-result: #1e7b45;
+        --glow:
+          0 0 0 3px rgba(30, 123, 69, 0.3), 0 20px 60px rgba(0, 0, 0, 0.7);
+        --toast-bg: #1e7b45;
+      }
+      :root[data-theme="light"] {
+        --page-bg: #d8d6d0;
+        --calc-body: #2a2a2a;
+        --calc-border: #1a1a1a;
+        --display-bg: #1e1e1e;
+        --display-border: #3a3a3a;
+        --display-text: #f0f0f0;
+        --expr-color: #666666;
+        --topbar-txt: #666666;
+        --btn-num: #d4d2cc;
+        --btn-num-txt: #111111;
+        --btn-num-border: #111111;
+        --btn-op: #e8952a;
+        --btn-op-txt: #ffffff;
+        --btn-op-border: #b86e18;
+        --btn-back: #c47a1a;
+        --btn-back-txt: #ffffff;
+        --btn-clr: #d63031;
+        --btn-clr-txt: #ffffff;
+        --btn-eq: #1e7b45;
+        --btn-eq-txt: #ffffff;
+        --btn-br: #3e3e3e;
+        --btn-br-txt: #cccccc;
+        --btn-br-border: #111111;
+        --btn-hist: #3a3a4a;
+        --btn-hist-txt: #e0e0ff;
+        --btn-hist-border: #1a1a28;
+        --hint-txt: #999999;
+        --hist-entry-bg: rgba(255, 255, 255, 0.07);
+        --hist-entry-h: rgba(255, 255, 255, 0.13);
+        --hist-divider: rgba(255, 255, 255, 0.08);
+        --hist-expr: #888888;
+        --hist-result: #5eebb4;
+        --glow:
+          0 0 0 3px rgba(30, 123, 69, 0.2), 0 20px 60px rgba(0, 0, 0, 0.3);
+        --toast-bg: #1e7b45;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: var(--page-bg);
+        font-family: "DM Sans", sans-serif;
+        transition: background 0.35s;
+        padding: 1rem;
+      }
+
+      /* ── Topbar ── */
+      .topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        max-width: 320px;
+        margin-bottom: 12px;
+      }
+      .topbar-name {
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        color: var(--topbar-txt);
+        text-transform: uppercase;
+        transition: color 0.35s;
+      }
+      .theme-btn {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        border: 1px solid var(--calc-border);
+        background: var(--calc-body);
+        color: var(--topbar-txt);
+        font-size: 14px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s;
+      }
+      .theme-btn:hover {
+        filter: brightness(0.92);
+      }
+
+      /* ── Calculator card ── */
+      .calculator {
+        background: var(--calc-body);
+        border: 1px solid var(--calc-border);
+        border-radius: 28px;
+        padding: 20px;
+        width: 100%;
+        max-width: 320px;
+        box-shadow: var(--glow);
+        transition:
+          background 0.35s,
+          border-color 0.35s,
+          box-shadow 0.35s;
+      }
+
+      /* ── Display wrapper — fixed height, flips between calc and history ── */
+      .display-area {
+        background: var(--display-bg);
+        border: 1px solid var(--display-border);
+        border-radius: 16px;
+        margin-bottom: 14px;
+        height: 110px;
+        position: relative;
+        overflow: hidden;
+        transition:
+          background 0.35s,
+          border-color 0.35s;
+      }
+
+      /* CALC VIEW — shown by default */
+      .display-calc {
+        position: absolute;
+        inset: 0;
+        padding: 10px 14px 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: flex-end;
+        gap: 2px;
+        transition:
+          opacity 0.25s,
+          transform 0.25s;
+      }
+      .display-calc.hidden {
+        opacity: 0;
+        transform: translateY(-12px);
+        pointer-events: none;
+      }
+      .expression {
+        font-family: "DM Mono", monospace;
+        font-size: 12px;
+        color: var(--expr-color);
+        min-height: 18px;
+        text-align: right;
+        width: 100%;
+        word-break: break-all;
+        transition: color 0.35s;
+      }
+      #display {
+        font-family: "DM Mono", monospace;
+        font-size: 36px;
+        font-weight: 300;
+        color: var(--display-text);
+        background: transparent;
+        border: none;
+        outline: none;
+        text-align: right;
+        width: 100%;
+        pointer-events: auto;
+        transition: color 0.35s;
+        overflow-x: auto;
+        white-space: nowrap;
+        scrollbar-width: thin;
+        scrollbar-color: var(--display-border) transparent;
+      }
+      #display::-webkit-scrollbar {
+        height: 3px;
+      }
+      #display::-webkit-scrollbar-thumb {
+        background: var(--display-border);
+        border-radius: 2px;
+      }
+      .copy-btn {
+        position: absolute;
+        top: 8px;
+        left: 8px;
+        width: 22px;
+        height: 22px;
+        border-radius: 6px;
+        border: 1px solid var(--display-border);
+        background: transparent;
+        color: var(--expr-color);
+        font-size: 11px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.15s;
+        z-index: 2;
+      }
+      .copy-btn:hover {
+        background: var(--display-border);
+      }
+
+      /* HISTORY VIEW — slides up from below */
+      .display-history {
+        position: absolute;
+        inset: 0;
+        overflow-y: auto;
+        padding: 6px 4px;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        opacity: 0;
+        transform: translateY(12px);
+        pointer-events: none;
+        transition:
+          opacity 0.25s,
+          transform 0.25s;
+      }
+      .display-history.visible {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: all;
+      }
+      .display-history::-webkit-scrollbar {
+        width: 3px;
+      }
+      .display-history::-webkit-scrollbar-thumb {
+        background: var(--display-border);
+        border-radius: 2px;
+      }
+
+      .hist-header {
+        font-size: 9px;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--expr-color);
+        padding: 2px 10px 4px;
+      }
+      .hist-entry {
+        background: var(--hist-entry-bg);
+        border-radius: 8px;
+        padding: 5px 10px;
+        cursor: pointer;
+        transition: background 0.1s;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 1px;
+      }
+      .hist-entry:hover {
+        background: var(--hist-entry-h);
+      }
+      .hist-entry .h-expr {
+        font-family: "DM Mono", monospace;
+        font-size: 10px;
+        color: var(--hist-expr);
+      }
+      .hist-entry .h-res {
+        font-family: "DM Mono", monospace;
+        font-size: 15px;
+        font-weight: 500;
+        color: var(--hist-result);
+      }
+      .hist-empty {
+        font-size: 12px;
+        color: var(--expr-color);
+        text-align: center;
+        padding: 28px 0;
+      }
+
+      /* ── Toast ── */
+      .toast {
+        position: fixed;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--toast-bg);
+        color: #fff;
+        font-size: 12px;
+        font-weight: 500;
+        padding: 7px 18px;
+        border-radius: 20px;
+        opacity: 0;
+        transition: opacity 0.3s;
+        pointer-events: none;
+        white-space: nowrap;
+      }
+
+      /* ── Button grid ── */
+      .buttons {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 9px;
+      }
+
+      button.btn {
+        height: 62px;
+        font-family: "DM Sans", sans-serif;
+        font-size: 19px;
+        font-weight: 400;
+        border-radius: 14px;
+        cursor: pointer;
+        transition:
+          filter 0.1s,
+          transform 0.08s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-tap-highlight-color: transparent;
+      }
+      button.btn:active {
+        transform: scale(0.9);
+        filter: brightness(0.82);
+      }
+      button.btn:hover {
+        filter: brightness(0.94);
+      }
+
+      .btn-num {
+        background: var(--btn-num);
+        color: var(--btn-num-txt);
+        border: 2.5px solid var(--btn-num-border);
+        box-shadow: 0 3px 0 var(--btn-num-border);
+        font-weight: 500;
+      }
+      .btn-op {
+        background: var(--btn-op);
+        color: var(--btn-op-txt);
+        border: 2px solid var(--btn-op-border);
+        box-shadow: 0 3px 0 var(--btn-op-border);
+        font-size: 21px;
+      }
+      .btn-back {
+        background: var(--btn-back);
+        color: var(--btn-back-txt);
+        border: 2px solid #8a5010;
+        box-shadow: 0 3px 0 #8a5010;
+        font-size: 16px;
+      }
+      .btn-clr {
+        background: var(--btn-clr);
+        color: var(--btn-clr-txt);
+        border: 2px solid #942020;
+        box-shadow: 0 3px 0 #942020;
+        font-weight: 500;
+      }
+      .btn-eq {
+        background: var(--btn-eq);
+        color: var(--btn-eq-txt);
+        border: 2px solid #0f4f28;
+        box-shadow: 0 3px 0 #0f4f28;
+        font-size: 24px;
+      }
+      .btn-br {
+        background: var(--btn-br);
+        color: var(--btn-br-txt);
+        border: 2px solid var(--btn-br-border);
+        box-shadow: 0 3px 0 var(--btn-br-border);
+        font-size: 14px;
+        font-weight: 500;
+        letter-spacing: 0.02em;
+      }
+      /* History button — indigo/slate, sits bottom-left */
+      .btn-hist {
+        background: var(--btn-hist);
+        color: var(--btn-hist-txt);
+        border: 2px solid var(--btn-hist-border);
+        box-shadow: 0 3px 0 var(--btn-hist-border);
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.02em;
+        line-height: 1.2;
+        text-align: center;
+      }
+      .btn-hist.active {
+        background: #2a2a3e;
+        color: #a0a0ff;
+      }
+
+      /* ── Hint ── */
+      .hint {
+        font-size: 10px;
+        color: var(--hint-txt);
+        margin-top: 10px;
+        letter-spacing: 0.03em;
+        transition: color 0.35s;
+      }
+
+      @media (max-width: 360px) {
+        .calculator {
+          padding: 14px;
+          border-radius: 20px;
+        }
+        button.btn {
+          height: 54px;
+          font-size: 17px;
+          border-radius: 11px;
+        }
+        #display {
+          font-size: 28px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="topbar">
+      <span class="topbar-name">Abhishek Prasad Gupta</span>
+      <button class="theme-btn" onclick="toggleTheme()" id="themeBtn">
+        🌙
+      </button>
+    </div>
+
+    <div class="calculator">
+      <!-- ── Display area ── -->
+      <div class="display-area">
+        <!-- Copy button (always visible) -->
+        <button class="copy-btn" onclick="copyResult()" title="Copy result">
+          ⎘
+        </button>
+
+        <!-- CALC VIEW -->
+        <div class="display-calc" id="displayCalc">
+          <div class="expression" id="expression"></div>
+          <input type="text" id="display" value="0" readonly />
+        </div>
+
+        <!-- HISTORY VIEW -->
+        <div class="display-history" id="displayHistory">
+          <div class="hist-header">Recent calculations</div>
+          <div class="hist-empty" id="histEmpty">No calculations yet</div>
+        </div>
+      </div>
+
+      <!-- ── Button grid ── -->
+      <div class="buttons">
+        <!-- Row 1: AC  ⌫  %  ÷ -->
+        <button class="btn btn-clr" onclick="clearDisplay()">AC</button>
+        <button class="btn btn-back" onclick="backspace()">⌫</button>
+        <button class="btn btn-br" onclick="percent()">%</button>
+        <button class="btn btn-op" onclick="appendValue('/')">÷</button>
+
+        <!-- Row 2: 7  8  9  × -->
+        <button class="btn btn-num" onclick="appendValue('7')">7</button>
+        <button class="btn btn-num" onclick="appendValue('8')">8</button>
+        <button class="btn btn-num" onclick="appendValue('9')">9</button>
+        <button class="btn btn-op" onclick="appendValue('*')">×</button>
+
+        <!-- Row 3: 4  5  6  − -->
+        <button class="btn btn-num" onclick="appendValue('4')">4</button>
+        <button class="btn btn-num" onclick="appendValue('5')">5</button>
+        <button class="btn btn-num" onclick="appendValue('6')">6</button>
+        <button class="btn btn-op" onclick="appendValue('-')">−</button>
+
+        <!-- Row 4: 1  2  3  + -->
+        <button class="btn btn-num" onclick="appendValue('1')">1</button>
+        <button class="btn btn-num" onclick="appendValue('2')">2</button>
+        <button class="btn btn-num" onclick="appendValue('3')">3</button>
+        <button class="btn btn-op" onclick="appendValue('+')">+</button>
+
+        <!-- Row 5: [Cal Hist]  .  ( )  = -->
+        <button class="btn btn-hist" onclick="toggleHistory()" id="histBtn">
+          History
+        </button>
+        <button class="btn btn-num" onclick="appendValue('.')">.</button>
+        <button class="btn btn-br" onclick="smartBracket()" id="bracketBtn">
+          ( )
+        </button>
+        <button class="btn btn-eq" onclick="calculate()">=</button>
+      </div>
+    </div>
+
+    <div class="hint">⌨ Keyboard supported · Escape to clear</div>
+    <div class="toast" id="toast"></div>
+
+    <script>
+      let calcHistory = [];
+      let justCalculated = false;
+      let historyOpen = false;
+
+      /* ── History toggle — flips display ── */
+      function toggleHistory() {
+        historyOpen = !historyOpen;
+        let calcView = document.getElementById("displayCalc");
+        let histView = document.getElementById("displayHistory");
+        let btn = document.getElementById("histBtn");
+
+        if (historyOpen) {
+          calcView.classList.add("hidden");
+          histView.classList.add("visible");
+          btn.classList.add("active");
+          renderHistory();
+        } else {
+          calcView.classList.remove("hidden");
+          histView.classList.remove("visible");
+          btn.classList.remove("active");
+        }
+      }
+
+      function renderHistory() {
+        let panel = document.getElementById("displayHistory");
+        // Clear old entries but keep header
+        panel.innerHTML = '<div class="hist-header">Recent calculations</div>';
+
+        if (calcHistory.length === 0) {
+          panel.innerHTML +=
+            '<div class="hist-empty">No calculations yet</div>';
+          return;
+        }
+        calcHistory.forEach((item) => {
+          let entry = document.createElement("div");
+          entry.className = "hist-entry";
+          entry.innerHTML = `
+          <span class="h-expr">${item.expr} =</span>
+          <span class="h-res">${item.result}</span>`;
+          entry.onclick = () => {
+            // Load result into calculator and flip back
+            document.getElementById("display").value = item.result;
+            document.getElementById("expression").textContent =
+              item.expr + " =";
+            justCalculated = true;
+            if (historyOpen) toggleHistory();
+          };
+          panel.appendChild(entry);
+        });
+      }
+
+      /* ── Smart ( ) button ── */
+      function smartBracket() {
+        let d = document.getElementById("display");
+        let val = d.value === "0" ? "" : d.value;
+        let opens = (val.match(/\(/g) || []).length;
+        let closes = (val.match(/\)/g) || []).length;
+        let last = val.slice(-1);
+        if (opens === closes || val === "" || "+-*/(".includes(last)) {
+          d.value = val === "" ? "(" : val + "(";
+        } else {
+          d.value = val + ")";
+        }
+        updateBracketBtn();
+        justCalculated = false;
+      }
+
+      function updateBracketBtn() {
+        let d = document.getElementById("display");
+        let val = d.value === "0" ? "" : d.value;
+        let btn = document.getElementById("bracketBtn");
+        let opens = (val.match(/\(/g) || []).length;
+        let closes = (val.match(/\)/g) || []).length;
+        btn.textContent = opens > closes ? ")" : "( )";
+      }
+
+      /* ── % button ── */
+      function percent() {
+        let d = document.getElementById("display");
+        if (d.value === "0" || d.value === "Error") return;
+        try {
+          d.value = parseFloat((parseFloat(eval(d.value)) / 100).toFixed(10));
+          document.getElementById("expression").textContent = "";
+          justCalculated = true;
+        } catch (e) {
+          d.value = "Error";
+          setTimeout(() => {
+            d.value = "0";
+          }, 1200);
+        }
+      }
+
+      /* ── Core functions ── */
+      function appendValue(val) {
+        // Close history view if open when user starts typing
+        if (historyOpen) toggleHistory();
+        let d = document.getElementById("display");
+        if (justCalculated && "0123456789(".includes(val)) {
+          d.value = "";
+          document.getElementById("expression").textContent = "";
+          justCalculated = false;
+        } else if (justCalculated) {
+          justCalculated = false;
+        }
+        d.value =
+          d.value === "0" && "0123456789".includes(val) ? val : d.value + val;
+        updateBracketBtn();
+      }
+
+      function clearDisplay() {
+        document.getElementById("display").value = "0";
+        document.getElementById("expression").textContent = "";
+        document.getElementById("bracketBtn").textContent = "( )";
+        justCalculated = false;
+        if (historyOpen) toggleHistory();
+      }
+
+      function backspace() {
+        let d = document.getElementById("display");
+        d.value =
+          d.value.length <= 1 || d.value === "Error"
+            ? "0"
+            : d.value.slice(0, -1);
+        justCalculated = false;
+        updateBracketBtn();
+      }
+
+      function calculate() {
+        let d = document.getElementById("display");
+        let expr = d.value;
+        if (!expr || expr === "0") return;
+        try {
+          let raw = eval(expr.replace(/÷/g, "/").replace(/×/g, "*"));
+          let result = parseFloat(raw.toFixed(15));
+          calcHistory.unshift({ expr, result });
+          if (calcHistory.length > 10) calcHistory.pop();
+          document.getElementById("expression").textContent = expr + " =";
+          animateTo(result);
+          justCalculated = true;
+        } catch (e) {
+          d.value = "Error";
+          setTimeout(() => {
+            d.value = "0";
+          }, 1200);
+        }
+      }
+
+      function animateTo(target) {
+        let d = document.getElementById("display");
+        if (typeof target !== "number" || !isFinite(target)) {
+          d.value = target;
+          return;
+        }
+        let start = parseFloat(d.value) || 0;
+        let t0 = null;
+        (function step(ts) {
+          if (!t0) t0 = ts;
+          let p = Math.min((ts - t0) / 260, 1);
+          let ease = 1 - Math.pow(1 - p, 3);
+          d.value = parseFloat((start + (target - start) * ease).toFixed(8));
+          if (p < 1) requestAnimationFrame(step);
+          else d.value = target;
+        })(performance.now());
+      }
+
+      /* ── Theme toggle ── */
+      function toggleTheme() {
+        let root = document.documentElement;
+        let btn = document.getElementById("themeBtn");
+        let dark = root.getAttribute("data-theme") === "dark";
+        root.setAttribute("data-theme", dark ? "light" : "dark");
+        btn.textContent = dark ? "☀️" : "🌙";
+      }
+
+      /* ── Copy result ── */
+      function copyResult() {
+        let val = document.getElementById("display").value;
+        navigator.clipboard
+          .writeText(val)
+          .then(() => showToast("Copied: " + val));
+      }
+
+      function showToast(msg) {
+        let t = document.getElementById("toast");
+        t.textContent = msg;
+        t.style.opacity = "1";
+        setTimeout(() => (t.style.opacity = "0"), 1800);
+      }
+
+      /* ── Keyboard support ── */
+      document.addEventListener("keydown", (e) => {
+        if (e.ctrlKey || e.metaKey || e.altKey) return;
+        if ("0123456789.+-*/()".includes(e.key)) {
+          e.preventDefault();
+          appendValue(e.key);
+        } else if (e.key === "Enter" || e.key === "=") {
+          e.preventDefault();
+          calculate();
+        } else if (e.key === "Backspace") {
+          e.preventDefault();
+          backspace();
+        } else if (e.key === "Escape") {
+          e.preventDefault();
+          clearDisplay();
+        }
+      });
+    </script>
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("./sw.js");
+      }
+    </script>
+  </body>
+</html>
