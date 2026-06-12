@@ -18,9 +18,12 @@ A fully functional, beautifully designed calculator web app built with pure HTML
 
 ## 📸 Preview
 
-| Dark Theme                                      | Light Theme                                    |
-| ----------------------------------------------- | ---------------------------------------------- |
-| Calculator body is light/off-white on dark page | Calculator body is dark charcoal on light page |
+| Dark Theme | Light Theme |
+|---|---|
+| ![Dark Theme](images/dark-theme.png) | ![Light Theme](images/light-theme.png) |
+
+### 📋 Calculation History
+![History](images/history.png)
 
 ---
 
