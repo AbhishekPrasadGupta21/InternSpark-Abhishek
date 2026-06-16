@@ -1,0 +1,738 @@
+/* Custom Global Theme Specification Matrix */
+:root {
+  --base-font: "Plus Jakarta Sans", sans-serif;
+  --mono-font: "DM Mono", monospace;
+
+  /* Bright, unmistakable clickable link color for Dark Mode */
+  --link-clickable: #38bdf8;
+
+  /* Signature Brand Synchronization Palette */
+  --primary-accent: #1e7b45;
+  --primary-accent-glow: rgba(30, 123, 69, 0.45);
+  --secondary-accent: #34d399;
+
+  /* ==========================================
+   * 🌑 DARK MODE (Black Background)
+   * Colors shift to ultra-bright, glowing tones
+   * ========================================== */
+  --app-bg: #0b0f12;
+  --text-main: #ffffff;
+  --text-muted: #cbd5e1;
+  --glass-bg: rgba(20, 27, 34, 0.8);
+  --glass-border: rgba(255, 255, 255, 0.15);
+  --glass-shadow: rgba(0, 0, 0, 0.6);
+  --input-bg: rgba(255, 255, 255, 0.08);
+  --nav-bg: rgba(11, 15, 18, 0.9);
+
+  /* Light, vibrant neon gradient that glows against the black background */
+  --brand-gradient: linear-gradient(
+    135deg,
+    #52e593 0%,
+    #6ee7b7 50%,
+    #22d3ee 100%
+  );
+}
+
+/* ==========================================
+ * ☀️ LIGHT MODE (White Background)
+ * Colors flip to rich, dark, high-contrast tones
+ * ========================================== */
+[data-theme="light"] {
+  --app-bg: #f4f6f8;
+  --text-main: #1f2937;
+  --text-muted: #4b5563;
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(0, 0, 0, 0.12);
+  --glass-shadow: rgba(31, 41, 55, 0.08);
+  --input-bg: rgba(0, 0, 0, 0.04);
+  --nav-bg: rgba(244, 246, 248, 0.9);
+
+  /* Rich, high-visibility classic link color for Light Mode */
+  --link-clickable: #2563eb;
+
+  /* Deep, crisp, dark-themed gradient that stays sharply visible on the white background */
+  --brand-gradient: linear-gradient(
+    135deg,
+    #0f4c2a 0%,
+    #165632 50%,
+    #0f4e75 100%
+  );
+}
+/* Global Standard Setters */
+body {
+  font-family: var(--base-font);
+  background-color: var(--app-bg);
+  color: var(--text-main);
+  overflow-x: hidden;
+  position: relative;
+  transition:
+    background-color 0.4s ease,
+    color 0.4s ease;
+}
+
+/* Background Glowing Abstract Shapes (USP 2) */
+.blob {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  filter: blur(140px);
+  z-index: -1;
+  opacity: 0.15;
+  pointer-events: none;
+}
+.blob-1 {
+  background: var(--primary-accent);
+  top: 15%;
+  left: -10%;
+}
+.blob-2 {
+  background: var(--secondary-accent);
+  top: 60%;
+  right: -10%;
+}
+
+/* Glassmorphism Card Core Class (USP 2) */
+.glass-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  backdrop-filter: blur(12px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+  box-shadow: 0 8px 32px 0 var(--glass-shadow);
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+/* Premium Typography Config */
+.highlight {
+  color: var(--secondary-accent);
+  background: linear-gradient(135deg, var(--secondary-accent), #a7f3d0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.section-title {
+  font-weight: 700;
+  text-transform: capitalize;
+  letter-spacing: -0.5px;
+}
+.title-underline {
+  width: 60px;
+  height: 4px;
+  background-color: var(--primary-accent);
+  margin: 12px auto 0;
+  border-radius: 2px;
+}
+
+/* Navbar Tuning Override (USP 8) */
+.navbar {
+  background-color: var(--nav-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--glass-border);
+  transition: background-color 0.4s ease;
+}
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--text-main) !important;
+}
+.navbar-brand .dot {
+  color: var(--secondary-accent);
+}
+.nav-link {
+  color: var(--text-muted) !important;
+  font-weight: 600;
+  padding: 0.5rem 1rem !important;
+  transition: color 0.25s ease;
+}
+.nav-link:hover,
+.nav-link.active {
+  color: var(--text-main) !important;
+  text-shadow: 0 0 10px var(--primary-accent-glow);
+}
+
+/* Theme Button Config (USP 7) */
+.btn-theme-toggle {
+  background: var(--input-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--text-main);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.btn-theme-toggle:hover {
+  transform: scale(1.1);
+}
+
+/* Hero Section Formatting Matrix */
+.hero-section {
+  min-height: 90vh;
+  padding: 80px 0;
+}
+.badge-candidate {
+  background: var(--primary-accent-glow);
+  border: 1px solid var(--primary-accent);
+  color: var(--text-main);
+  padding: 6px 14px;
+  border-radius: 30px;
+  font-size: 0.85rem;
+  display: inline-block;
+  font-family: var(--mono-font);
+}
+.hero-title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  line-height: 1.1;
+}
+.hero-subtitle {
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  color: var(--text-muted);
+  font-weight: 400;
+}
+.cursor {
+  font-weight: 300;
+  color: var(--secondary-accent);
+  animation: blink 0.8s infinite;
+}
+
+/* Custom Button Core Elements */
+.btn-custom-primary {
+  background-color: var(--primary-accent);
+  color: #fff !important;
+  border: none;
+  font-weight: 600;
+  padding: 10px 24px;
+  border-radius: 8px;
+  box-shadow: 0 4px 14px var(--primary-accent-glow);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+.btn-custom-secondary {
+  background: var(--input-bg);
+  color: var(--text-main) !important;
+  border: 1px solid var(--glass-border);
+  font-weight: 600;
+  padding: 10px 24px;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+.btn-custom-primary:hover,
+.btn-custom-secondary:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+.profile-img-container {
+  position: relative;
+  display: inline-block;
+}
+.profile-img-container::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  border: 2px dashed var(--primary-accent);
+  border-radius: 50%;
+  animation: rotateClockwise 20s linear infinite;
+}
+.profile-img {
+  width: min(280px, 70vw);
+  height: min(280px, 70vw);
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--glass-bg);
+}
+
+/* Info Detail Links */
+.info-list li {
+  margin-bottom: 12px;
+  font-size: 1.05rem;
+}
+.info-list i {
+  margin-right: 10px;
+  font-size: 1.2rem;
+}
+
+/* Skill Bars Context Matrix (USP 3) */
+.progress-bar-wrap {
+  background: var(--input-bg);
+  height: 8px;
+  border-radius: 4px;
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+}
+.progress-bar-fill {
+  background: linear-gradient(
+    90deg,
+    var(--primary-accent),
+    var(--secondary-accent)
+  );
+  width: 0%; /* Driven via JS IntersectionObserver dynamic triggers */
+  height: 100%;
+  border-radius: 4px;
+  transition: width 1.5s cubic-bezier(0.1, 0.8, 0.2, 1);
+}
+
+/* 3D Flip Card System Logic Architecture (USP 4) */
+.flip-card {
+  background-color: transparent;
+  perspective: 1000px;
+  height: 380px;
+}
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: left;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  overflow: hidden;
+}
+.flip-card-back {
+  transform: rotateY(180deg);
+}
+.project-img-wrapper {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 15px 15px 0 0;
+}
+.project-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.project-badge,
+.project-badge-upcoming {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 0.75rem;
+  font-family: var(--mono-font);
+  padding: 4px 10px;
+  border-radius: 20px;
+  color: #fff;
+}
+.project-badge {
+  background-color: var(--primary-accent);
+}
+.project-badge-upcoming {
+  background-color: #d97706;
+}
+.badge-tech {
+  background: var(--input-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+/* Visual Timeline Infrastructure System Setup (USP 5) */
+.timeline-wrapper {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+.timeline-wrapper::after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  background-color: var(--glass-border);
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.timeline-item {
+  padding: 10px 40px;
+  position: relative;
+  width: 50%;
+}
+.timeline-item.left {
+  left: 0;
+}
+.timeline-item.right {
+  left: 50%;
+}
+.timeline-dot {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: var(--secondary-accent);
+  border: 4px solid var(--app-bg);
+  top: 30px;
+  z-index: 2;
+}
+.timeline-item.left .timeline-dot {
+  right: -8px;
+}
+.timeline-item.right .timeline-dot {
+  left: -8px;
+}
+.timeline-date {
+  font-family: var(--mono-font);
+  color: var(--secondary-accent);
+  font-size: 0.9rem;
+  display: block;
+  margin-bottom: 6px;
+}
+
+/* Interactive Input Controls Alignment */
+.form-control {
+  background-color: var(--input-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--text-main) !important;
+  border-radius: 8px;
+  padding: 12px;
+  transition: border-color 0.2s ease;
+}
+.form-control:focus {
+  background-color: var(--input-bg);
+  border-color: var(--secondary-accent);
+  box-shadow: 0 0 0 3px var(--primary-accent-glow);
+  outline: none;
+}
+.form-control::placeholder {
+  color: var(--text-muted);
+  opacity: 0.6;
+}
+
+/* Connection Button Icons Layout (USP 10) */
+.social-btn {
+  width: 46px;
+  height: 46px;
+  background: var(--input-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--text-main);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  transition:
+    transform 0.25s ease,
+    background-color 0.25s ease,
+    color 0.25s ease;
+}
+.social-btn:hover {
+  transform: translateY(-3px);
+  background-color: var(--primary-accent);
+  color: #fff;
+}
+
+/* Native Animation Scroll Reveal Matrix (USP 6) */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(35px);
+  transition:
+    opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1),
+    transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.scroll-reveal.reveal-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Standard System Keyframe Declarations */
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+@keyframes rotateClockwise {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive Viewport Grid Refits */
+@media (max-width: 768px) {
+  .timeline-wrapper::after {
+    left: 31px;
+  }
+  .timeline-item {
+    width: 100%;
+    padding-left: 70px;
+    padding-right: 25px;
+  }
+  .timeline-item.right {
+    left: 0;
+  }
+  .timeline-item.left .timeline-dot,
+  .timeline-item.right .timeline-dot {
+    left: 23px;
+  }
+  .flip-card {
+    height: 420px;
+  }
+}
+/* High-Priority Rule for Brand Name and Footer text to Sync Perfectly */
+.navbar-brand .nav-brand-name,
+.dynamic-footer-text {
+  background: var(
+    --brand-gradient
+  ) !important; /* Force browser to use our dynamic theme token */
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+
+  font-weight: 700;
+  display: inline-block;
+  transition:
+    background 0.4s ease,
+    opacity 0.25s ease;
+}
+
+/* Maintain soft interactive hover just for the header logo name */
+.navbar-brand:hover .nav-brand-name {
+  opacity: 0.85;
+}
+
+/* Vertical Screenshot Project Frame Optimizer */
+.project-img-wrapper {
+  background: #111827; /* Deep, neutral dark background to frame your portrait image */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  overflow: hidden;
+}
+/* Traditional Unmistakable Hyperlink Styles */
+.clickable-email-link {
+  color: var(--link-clickable) !important;
+  text-decoration: underline !important;
+  font-weight: 600;
+  transition:
+    opacity 0.2s ease,
+    color 0.2s ease;
+}
+
+/* Give it a slight interaction state when hovered */
+.clickable-email-link:hover {
+  opacity: 0.8;
+  color: var(
+    --secondary-accent
+  ) !important; /* Temporarily flashes your brand color on hover */
+}
+/* Floating Back to Top Button Specs */
+.btn-back-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 46px;
+  height: 46px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--text-main);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  cursor: pointer;
+  z-index: 999;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 16px var(--glass-shadow);
+
+  /* Start hidden and shifted down slightly for a clean fade-in entry */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(15px);
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease,
+    visibility 0.4s ease,
+    background-color 0.25s ease;
+}
+
+/* Make it visible when the trigger class is applied by JavaScript */
+.btn-back-to-top.show-btn {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Hover Interactive State: Flashes your signature brand color */
+.btn-back-to-top:hover {
+  background-color: var(--primary-accent);
+  color: #ffffff !important;
+  transform: scale(1.1);
+}
+
+/* Responsive adjustment so it doesn't crowd mobile phone layouts */
+@media (max-width: 576px) {
+  .btn-back-to-top {
+    bottom: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    font-size: 1.3rem;
+  }
+}
+
+/* Smooth Scroll & Sticky Navbar Offset Corrector */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Apply an offset to all main landing sections */
+#home,
+#about,
+#skills,
+#projects,
+#timeline,
+#contact {
+  /* Adjust this value based on your navbar's height (around 70px to 90px) */
+  scroll-margin-top: 90px;
+}
+/* ==========================================================================
+   🎯 UNIFIED TIMELINE TRACK DESIGN ENGINE & HOVER EFFECT MATRIX
+   ========================================================================== */
+
+/* Alternating card padding states for asymmetric modern presentation */
+.timeline-item {
+  position: relative;
+  width: 50%;
+  padding: 10px 40px;
+  box-sizing: border-box;
+}
+
+.timeline-item.left {
+  left: 0;
+  text-align: right;
+}
+.timeline-item.right {
+  left: 50%;
+  text-align: left;
+}
+
+/* Keep date badges consistently styled */
+.timeline-date {
+  font-family: var(--mono-font);
+  font-size: 0.85rem;
+  background: rgba(52, 211, 153, 0.12);
+  color: var(--secondary-accent);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+/* Ensure glass-card container transitions are fluid */
+/* Center-Aligned Timeline Card Content Engine */
+.timeline-item .glass-card {
+  text-align: center !important; /* Force all text elements to align in the center */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center flex items like icons and titles horizontally */
+  justify-content: center;
+  transition:
+    transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+  border: 1px solid var(--glass-border);
+}
+
+/* Ensure headings have zero accidental side margins */
+.timeline-item .glass-card h4 {
+  width: 100%;
+  text-align: center;
+}
+
+/* Center alignment for subheadings/institutions with icons */
+.timeline-item .glass-card .highlight {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Center alignment for description text bodies */
+.timeline-item .glass-card p {
+  text-align: center;
+  max-width: 90%; /* Keeps text wrapped beautifully instead of stretching too wide */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Remove asymmetric text alignments from previous layout overrides */
+.timeline-item.left {
+  text-align: center !important;
+}
+.timeline-item.right {
+  text-align: center !important;
+}
+
+/* ==========================================
+   ✨ PREMIUM INTERACTIVE HOVER GLOW ACTIONS
+   ========================================== */
+.timeline-item:hover .glass-card {
+  border-color: var(--secondary-accent) !important;
+
+  /* Adds a smooth glowing background aura matching your theme components */
+  box-shadow:
+    0 8px 24px rgba(52, 211, 153, 0.15),
+    0 0 12px rgba(52, 211, 153, 0.1);
+}
+
+/* Push animations based on structural side alignment */
+.timeline-item.left:hover .glass-card {
+  transform: translateX(-4px);
+}
+.timeline-item.right:hover .glass-card {
+  transform: translateX(4px);
+}
+
+/* Unified glow for timeline dot nodes on alignment */
+.timeline-item:hover .timeline-dot {
+  background: var(--secondary-accent) !important;
+  box-shadow: 0 0 10px var(--secondary-accent);
+  transform: scale(1.15);
+}
+
+/* Responsive breakpoint for mobile phone layouts stacking cards vertically */
+@media (max-width: 768px) {
+  .timeline-item {
+    width: 100% !important;
+    left: 0 !important;
+    text-align: left !important;
+    padding-left: 30px;
+  }
+  .timeline-item.left:hover .glass-card,
+  .timeline-item.right:hover .glass-card {
+    transform: translateX(4px);
+  }
+}
