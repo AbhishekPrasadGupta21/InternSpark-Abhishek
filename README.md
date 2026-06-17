@@ -5,6 +5,7 @@
 ![HTML](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)
 ![CSS](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
+![Bootstrap](https://img.shields.io/badge/Bootstrap_5-7952B3?style=flat&logo=bootstrap&logoColor=white)
 
 All tasks completed as part of the **InternSpark Frontend Developer Internship** (2 months, starting 07/06/2026).
 
@@ -14,8 +15,8 @@ All tasks completed as part of the **InternSpark Frontend Developer Internship**
 
 | Task      | Description       | Live Demo                                                                                   |
 | --------- | ----------------- | ------------------------------------------------------------------------------------------- |
+| ✅ Task 1 | Portfolio Website | [View Live](https://abhishekprasadgupta21.github.io/InternSpark-Abhishek/task1-portfolio/)  |
 | ✅ Task 2 | Calculator App    | [View Live](https://abhishekprasadgupta21.github.io/InternSpark-Abhishek/task2-calculator/) |
-| 🔄 Task 1 | Portfolio Website | Coming soon                                                                                 |
 | 🔄 Task 3 | To-Do List App    | Coming soon                                                                                 |
 | 🔄 Task 4 | Netflix Clone     | Coming soon                                                                                 |
 
@@ -23,21 +24,48 @@ All tasks completed as part of the **InternSpark Frontend Developer Internship**
 
 ## 🗂️ Folder Structure
 
-​`
+```
 InternSpark-Abhishek/
 │
-├── task2-calculator/     ✅ Complete
+├── task1-portfolio/       ✅ Complete
+│   ├── css/
+│   │   └── style.css
+│   ├── js/
+│   │   └── app.js
+│   ├── images/
+│   │   ├── apg_logo.png
+│   │   ├── calculator.jpeg
+│   │   └── profile.jpeg
+│   ├── Abhishek_Resume.pdf
+│   ├── index.html
+│   └── README.md
+│
+├── task2-calculator/      ✅ Complete
 │   ├── index.html
 │   ├── README.md
 │   ├── manifest.json
 │   └── sw.js
 │
-├── task1-portfolio/      🔄 Upcoming
-├── task3-todo-app/       🔄 Upcoming
-├── task4-netflix-clone/  🔄 Upcoming
+├── task3-todo-app/        🔄 Upcoming
+├── task4-netflix-clone/   🔄 Upcoming
 │
 └── README.md
-​`
+```
+
+---
+
+## 🛠️ Technologies Used Across Tasks
+
+| Technology                              | Used In   |
+| --------------------------------------- | --------- |
+| HTML5                                   | All tasks |
+| CSS3 (Custom Properties, Grid, Flexbox) | All tasks |
+| Vanilla JavaScript                      | All tasks |
+| Bootstrap 5                             | Task 1    |
+| Glassmorphism UI                        | Task 1    |
+| Intersection Observer API               | Task 1    |
+| PWA (Service Worker + Manifest)         | Task 2    |
+| Git & GitHub Pages                      | All tasks |
 
 ---
 
