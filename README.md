@@ -17,7 +17,7 @@ All tasks completed as part of the **InternSpark Frontend Developer Internship**
 | --------- | ----------------- | ------------------------------------------------------------------------------------------- |
 | ✅ Task 1 | Portfolio Website | [View Live](https://abhishekprasadgupta21.github.io/InternSpark-Abhishek/task1-portfolio/)  |
 | ✅ Task 2 | Calculator App    | [View Live](https://abhishekprasadgupta21.github.io/InternSpark-Abhishek/task2-calculator/) |
-| 🔄 Task 3 | To-Do List App    | Coming soon                                                                                 |
+| ✅ Task 3 | To-Do List App    | [View Live](https://abhishekprasadgupta21.github.io/InternSpark-Abhishek/task3-todo-app/)   |
 | 🔄 Task 4 | Netflix Clone     | Coming soon                                                                                 |
 
 ---
@@ -46,7 +46,10 @@ InternSpark-Abhishek/
 │   ├── manifest.json
 │   └── sw.js
 │
-├── task3-todo-app/        🔄 Upcoming
+├── task3-todo-app/        ✅ Complete
+│   ├── index.html
+│   └── README.md
+│
 ├── task4-netflix-clone/   🔄 Upcoming
 │
 └── README.md
@@ -56,16 +59,19 @@ InternSpark-Abhishek/
 
 ## 🛠️ Technologies Used Across Tasks
 
-| Technology                              | Used In   |
-| --------------------------------------- | --------- |
-| HTML5                                   | All tasks |
-| CSS3 (Custom Properties, Grid, Flexbox) | All tasks |
-| Vanilla JavaScript                      | All tasks |
-| Bootstrap 5                             | Task 1    |
-| Glassmorphism UI                        | Task 1    |
-| Intersection Observer API               | Task 1    |
-| PWA (Service Worker + Manifest)         | Task 2    |
-| Git & GitHub Pages                      | All tasks |
+| Technology                              | Used In        |
+| --------------------------------------- | -------------- |
+| HTML5                                   | All tasks      |
+| CSS3 (Custom Properties, Grid, Flexbox) | All tasks      |
+| Vanilla JavaScript                      | All tasks      |
+| Bootstrap 5                             | Task 1         |
+| Glassmorphism UI                        | Task 1, Task 3 |
+| Intersection Observer API               | Task 1         |
+| PWA (Service Worker + Manifest)         | Task 2         |
+| LocalStorage API                        | Task 2, Task 3 |
+| HTML5 Drag and Drop API                 | Task 3         |
+| Canvas API (confetti animation)         | Task 3         |
+| Git & GitHub Pages                      | All tasks      |
 
 ---
 
