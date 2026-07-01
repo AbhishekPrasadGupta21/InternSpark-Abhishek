@@ -54,8 +54,12 @@ A feature-rich, glassmorphic to-do list application with drag-and-drop reorderin
 ```
 task3-todo-app/
 │
+├── images/
+│   ├── dark-theme.png    ← Dark theme preview
+│   └── light-theme.png   ← Light theme preview
+│
 ├── index.html        ← Everything: HTML + CSS + JavaScript in one file
-└── README.md         ← You are here
+└── README.md          ← You are here
 ```
 
 > Like the Calculator app, this project is a single self-contained file — no external dependencies, no build step required.

@@ -18,11 +18,12 @@ A fully functional, beautifully designed calculator web app built with pure HTML
 
 ## 📸 Preview
 
-| Dark Theme | Light Theme |
-|---|---|
+| Dark Theme                           | Light Theme                            |
+| ------------------------------------ | -------------------------------------- |
 | ![Dark Theme](images/dark-theme.png) | ![Light Theme](images/light-theme.png) |
 
 ### 📋 Calculation History
+
 ![History](images/history.png)
 
 ---
@@ -54,6 +55,11 @@ A fully functional, beautifully designed calculator web app built with pure HTML
 
 ```
 task2-calculator/
+│
+├── images/
+│   ├── dark-theme.png    ← Dark theme preview
+│   ├── light-theme.png   ← Light theme preview
+│   └── history.png       ← Calculation history preview
 │
 ├── index.html        ← Everything: HTML + CSS + JavaScript in one file
 ├── manifest.json     ← PWA manifest (makes it installable as an app)

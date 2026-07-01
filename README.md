@@ -35,18 +35,31 @@ InternSpark-Abhishek/
 │   ├── images/
 │   │   ├── apg_logo.png
 │   │   ├── calculator.jpeg
-│   │   └── profile.jpeg
+│   │   ├── profile.jpeg
+│   │   ├── dark-theme.png
+│   │   ├── light-theme.png
+│   │   ├── timeline.png
+│   │   └── todo-app.jpeg
 │   ├── Abhishek_Resume.pdf
 │   ├── index.html
 │   └── README.md
 │
 ├── task2-calculator/      ✅ Complete
+│   ├── images/
+│   │   ├── dark-theme.png
+│   │   ├── light-theme.png
+│   │   └── history.png
 │   ├── index.html
-│   ├── README.md
 │   ├── manifest.json
-│   └── sw.js
+│   ├── sw.js
+│   ├── icon-192.png
+│   ├── icon-512.png
+│   └── README.md
 │
 ├── task3-todo-app/        ✅ Complete
+│   ├── images/
+│   │   ├── dark-theme.png
+│   │   └── light-theme.png
 │   ├── index.html
 │   └── README.md
 │

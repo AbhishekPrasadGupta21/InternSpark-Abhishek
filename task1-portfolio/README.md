@@ -61,11 +61,15 @@ task1-portfolio/
 │   └── app.js            ← Typewriter logic, animations, theme toggle, form handling
 │
 ├── images/
-│   ├── profile.jpg       ← Profile image asset
+│   ├── apg_logo.png      ← Logo asset
+│   ├── calculator.jpeg   ← Task 2 project thumbnail
+│   ├── profile.jpeg      ← Profile image asset
 │   ├── dark-theme.png    ← Dark theme preview
 │   ├── light-theme.png   ← Light theme preview
-│   └── timeline.png      ← Timeline preview image
+│   ├── timeline.png      ← Timeline preview image
+│   └── todo-app.jpeg     ← Task 3 project thumbnail
 │
+├── Abhishek_Resume.pdf   ← Downloadable resume
 ├── index.html            ← Main website structure
 └── README.md             ← You are here
 ```
