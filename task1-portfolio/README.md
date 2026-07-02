@@ -67,6 +67,7 @@ task1-portfolio/
 │   ├── dark-theme.png    ← Dark theme preview
 │   ├── light-theme.png   ← Light theme preview
 │   ├── timeline.png      ← Timeline preview image
+│   ├── netflix-clone.jpeg ← Task 4 project thumbnail
 │   └── todo-app.jpeg     ← Task 3 project thumbnail
 │
 ├── Abhishek_Resume.pdf   ← Downloadable resume
