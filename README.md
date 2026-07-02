@@ -13,12 +13,12 @@ All tasks completed as part of the **InternSpark Frontend Developer Internship**
 
 ## 📁 Tasks
 
-| Task      | Description       | Live Demo                                                                                   |
-| --------- | ----------------- | ------------------------------------------------------------------------------------------- |
-| ✅ Task 1 | Portfolio Website | [View Live](https://abhishekprasadgupta21.github.io/InternSpark-Abhishek/task1-portfolio/)  |
-| ✅ Task 2 | Calculator App    | [View Live](https://abhishekprasadgupta21.github.io/InternSpark-Abhishek/task2-calculator/) |
-| ✅ Task 3 | To-Do List App    | [View Live](https://abhishekprasadgupta21.github.io/InternSpark-Abhishek/task3-todo-app/)   |
-| 🔄 Task 4 | Netflix Clone     | Coming soon                                                                                 |
+| Task      | Description       | Live Demo                                                                                      |
+| --------- | ----------------- | ---------------------------------------------------------------------------------------------- |
+| ✅ Task 1 | Portfolio Website | [View Live](https://abhishekprasadgupta21.github.io/InternSpark-Abhishek/task1-portfolio/)     |
+| ✅ Task 2 | Calculator App    | [View Live](https://abhishekprasadgupta21.github.io/InternSpark-Abhishek/task2-calculator/)    |
+| ✅ Task 3 | To-Do List App    | [View Live](https://abhishekprasadgupta21.github.io/InternSpark-Abhishek/task3-todo-app/)      |
+| ✅ Task 4 | Netflix Clone     | [View Live](https://abhishekprasadgupta21.github.io/InternSpark-Abhishek/task4-netflix-clone/) |
 
 ---
 
@@ -63,7 +63,14 @@ InternSpark-Abhishek/
 │   ├── index.html
 │   └── README.md
 │
-├── task4-netflix-clone/   🔄 Upcoming
+├── task4-netflix-clone/   ✅ Complete
+│   ├── images/
+│   │   ├── home-hero.png
+│   │   ├── row-hover.png
+│   │   ├── search.png
+│   │   └── modal-trailer.png
+│   ├── index.html
+│   └── README.md
 │
 └── README.md
 ```
@@ -72,19 +79,21 @@ InternSpark-Abhishek/
 
 ## 🛠️ Technologies Used Across Tasks
 
-| Technology                              | Used In        |
-| --------------------------------------- | -------------- |
-| HTML5                                   | All tasks      |
-| CSS3 (Custom Properties, Grid, Flexbox) | All tasks      |
-| Vanilla JavaScript                      | All tasks      |
-| Bootstrap 5                             | Task 1         |
-| Glassmorphism UI                        | Task 1, Task 3 |
-| Intersection Observer API               | Task 1         |
-| PWA (Service Worker + Manifest)         | Task 2         |
-| LocalStorage API                        | Task 2, Task 3 |
-| HTML5 Drag and Drop API                 | Task 3         |
-| Canvas API (confetti animation)         | Task 3         |
-| Git & GitHub Pages                      | All tasks      |
+| Technology                              | Used In                |
+| --------------------------------------- | ---------------------- |
+| HTML5                                   | All tasks              |
+| CSS3 (Custom Properties, Grid, Flexbox) | All tasks              |
+| Vanilla JavaScript                      | All tasks              |
+| Bootstrap 5                             | Task 1                 |
+| Glassmorphism UI                        | Task 1, Task 3         |
+| Intersection Observer API               | Task 1                 |
+| PWA (Service Worker + Manifest)         | Task 2                 |
+| LocalStorage API                        | Task 2, Task 3, Task 4 |
+| HTML5 Drag and Drop API                 | Task 3                 |
+| Canvas API (confetti animation)         | Task 3                 |
+| TMDB REST API                           | Task 4                 |
+| Fetch API (async data loading)          | Task 4                 |
+| Git & GitHub Pages                      | All tasks              |
 
 ---
 
